@@ -1,0 +1,26 @@
+{
+  "name": "taskmanager-full-stack-app",
+  "version": "1.0.0",
+  "description": "This is a multi-user task management app. which has progess saving capabilities",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/al-rasels/taskmanager-full-stack-app.git"
+  },
+  "keywords": [
+    "Task",
+    "Manager",
+    "task",
+    "manager",
+    "taskmanager"
+  ],
+  "author": "Md Humaun Al Rasel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/al-rasels/taskmanager-full-stack-app/issues"
+  },
+  "homepage": "https://github.com/al-rasels/taskmanager-full-stack-app#readme"
+}
