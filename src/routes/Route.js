@@ -63,6 +63,18 @@ router.get(
   AuthVerifyMiddleware,
   TaskController.updateTaskStatus
 );
+// 4. Get Tasks by Status Route
+router.get(
+  "/getTasksByStatus/:status",
+  AuthVerifyMiddleware,
+  TaskController.getTasksByStatus
+);
+// Count Tasks by Status Route
+router.get(
+  "/countTasksByStatus",
+  AuthVerifyMiddleware,
+  TaskController.getTaskStatusCount
+);
 
 // Exporting the configured router
 module.exports = router;
