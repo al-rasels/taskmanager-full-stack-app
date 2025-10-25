@@ -1,0 +1,49 @@
+.icon-nav {
+  padding: 6px;
+  transition: 0.3s;
+  color: #606060;
+}
+.icon-nav:hover {
+  color: #cb0c9f;
+  transition: 0.3s;
+}
+.icon-nav:active {
+  border-radius: 50%;
+  padding: 8px;
+  transition: 0.3s;
+  color: #363b64;
+  background: rgba(0, 0, 0, 0.16);
+  color: #cb0c9f;
+}
+.icon-nav-img {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+}
+.side-nav-open {
+  padding-top: 70px;
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  transition: 0.3s;
+  background-color: #ffff;
+  border-right: 1px solid rgba(0, 0, 0, 0.075);
+  scrollbar-color: #cccccc #f5f5f5;
+  scrollbar-width: thin;
+}
+.side-nav-close {
+  padding-top: 70px;
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  transition: 0.3s;
+  background-color: #ffff;
+  border-right: 1px solid rgba(0, 0, 0, 0.075);
+}

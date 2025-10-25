@@ -1,0 +1,28 @@
+/* progress styles */
+.LoadingOverlay {
+  position: absolute;
+  display: block;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+  z-index: 1000 !important;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.Line-Progress .indeterminate {
+  background-color: #cb0c9f;
+}
+
+.Line-Progress .indeterminate:before {
+  z-index: -100 !important;
+  height: 3px;
+  content: "";
+  position: fixed;
+  background-color: inherit;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
