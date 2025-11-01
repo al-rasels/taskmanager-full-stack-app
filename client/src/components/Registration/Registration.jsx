@@ -1,7 +1,65 @@
-import React from "react";
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 const Registration = () => {
-  return <div>Registration</div>;
+  return (
+    <Fragment>
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-md-7 col-lg-6 center-screen">
+            <div className="card animated fadeIn w-100 p-3">
+              <div className="card-body">
+                <h5>Sign Up</h5>
+                <br />
+                <input
+                  type="email"
+                  placeholder="User Email"
+                  className="form-control animated fadeInUp"
+                />
+                <br />
+                <input
+                  type="text"
+                  placeholder="First Name"
+                  className="form-control animated fadeInUp"
+                />
+                <br />
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  className="form-control animated fadeInUp"
+                />
+                <br />
+                <input
+                  type="mobile"
+                  placeholder="Mobile"
+                  className="form-control animated fadeInUp"
+                />
+                <br />
+                <input
+                  type="password"
+                  placeholder="User Password"
+                  className="form-control animated fadeInUp"
+                />
+                <br />
+                <button className="btn w-100 float-end custom-btn-primary animated fadeInUp">
+                  Next
+                </button>
+                <div className="text-center w-100">
+                  <Link className="text-center " to={"login"}>
+                    Sign In
+                  </Link>
+                  <br />
+                  <Link className="text-center " to={"/"}>
+                    Forget Password
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  );
 };
 
 export default Registration;

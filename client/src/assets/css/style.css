@@ -6,6 +6,10 @@
 @import "./sidebar.css";
 @import "./sidebar.css";
 
+:root {
+  --color-primary: #cb0c9f;
+}
+
 /* Global Styles */
 body {
   font-family: "Poppins", sans-serif !important;
@@ -13,7 +17,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   background: #f9f8f8;
-  font-size: 14px;
+  font-size: 16px;
 
   color: #212529;
 }
@@ -55,7 +59,13 @@ body a {
   text-decoration: none;
   cursor: pointer;
 }
-
+.custom-btn-primary {
+  background: var(--color-primary) !important;
+  font-weight: 600 !important;
+  margin: 16px 0 16px;
+  color: #f9f8f8 !important;
+  font-weight: 600 !important;
+}
 .swal2-styled:focus {
   box-shadow: none !important;
 }

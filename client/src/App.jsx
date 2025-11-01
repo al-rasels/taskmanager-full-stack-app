@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DashboardPage from "./pages/DashboardPage";
 import CreatePage from "./pages/CreatePage";
@@ -11,15 +11,16 @@ import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import ProfilePage from "./pages/ProfilePage";
 import NotFoundPage from "./pages/NotFoundPage";
+import FullScreenLoader from "./components/masterLayout/FullScreenLoader";
 
 const App = () => {
   return (
-    <>
+    <Fragment>
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<DashboardPage />} />
           <Route exact path="/create" element={<CreatePage />} />
-          <Route exact path="/all" element={<NewPage />} />
+          <Route exact path="/new-task" element={<NewPage />} />
           <Route exact path="/canceled" element={<CanceledPage />} />
           <Route exact path="/progress" element={<ProgressPage />} />
           <Route exact path="/completed" element={<CompletedPage />} />
@@ -30,7 +31,8 @@ const App = () => {
           <Route exact path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
-    </>
+      <FullScreenLoader />
+    </Fragment>
   );
 };
 

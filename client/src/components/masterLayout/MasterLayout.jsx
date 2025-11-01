@@ -80,7 +80,7 @@ const MasterLayout = ({ children }) => {
         className="side-nav-open ">
         {/* Side Navigation content goes here */}
         <NavLink
-          to="/dashboard"
+          to="/"
           className={(navData) =>
             navData.isActive
               ? "side-bar-item-active side-bar-item mt-2"
@@ -101,7 +101,7 @@ const MasterLayout = ({ children }) => {
           <span className="side-bar-item-caption">Create New</span>
         </NavLink>
         <NavLink
-          to="/new-tasks"
+          to="/new-task"
           className={(navData) =>
             navData.isActive
               ? "side-bar-item-active side-bar-item mt-2"

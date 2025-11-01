@@ -1,7 +1,17 @@
-import React from "react";
-
+import React, { Fragment, lazy } from "react";
+import MasterLayout from "../components/masterLayout/MasterLayout";
+import LazyLoader from "../components/masterLayout/LazyLoader";
+const Profile = lazy(() => import("../components/Profile/Profile"));
 const ProfilePage = () => {
-  return <div>ProfilePage</div>;
+  return (
+    <Fragment>
+      <MasterLayout>
+        <Suspense fallback={<LazyLoader />}>
+          <Profile />
+        </Suspense>
+      </MasterLayout>
+    </Fragment>
+  );
 };
 
 export default ProfilePage;
