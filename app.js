@@ -62,7 +62,7 @@ app.use(
 /* -------------------------------------------------------------------------- */
 /*                             Database Connection                            */
 /* -------------------------------------------------------------------------- */
-
+mongoose.set("strictQuery", false);
 const MONGO_URI =
   "mongodb+srv://<username>:<password>@cluster0.vidqntm.mongodb.net/task_manager?retryWrites=true&w=majority";
 

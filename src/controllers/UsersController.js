@@ -9,7 +9,7 @@ exports.registration = async (req, res) => {
   const reqBody = req.body;
   UsersModel.create(reqBody, (err, data) => {
     if (err) {
-      res.status(400).json({ status: "fail", message: err.message });
+      res.status(200).json({ status: "fail", message: err.message });
     } else {
       res
         .status(200)
