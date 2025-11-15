@@ -60,9 +60,6 @@ exports.login = async (req, res) => {
             .json({ status: "fail", message: "unauthorized user" });
         }
       }
-      res
-        .status(200)
-        .json({ status: "success", message: "User Logged In", data: data });
     }
   );
 };
@@ -83,4 +80,40 @@ exports.profileUpdate = async (req, res) => {
         .json({ status: "success", message: "Profile Updated", data: data });
     }
   });
+};
+
+/* -------------------------------------------------------------------- */
+/*                       Get profile Controller                         */
+/* -------------------------------------------------------------------- */
+exports.getProfile = async (req, res) => {
+  const email = req.headers["email"];
+  UsersModel.aggregate(
+    [
+      { $match: { email: email } },
+      {
+        $project: {
+          _id: 1,
+          email: 1,
+          firstName: 1,
+          lastName: 1,
+          phone: 1,
+          photo: 1,
+          password: 1,
+        },
+      },
+    ],
+    (err, data) => {
+      if (err) {
+        res.status(400).json({ status: "fail", message: err.message });
+      } else {
+        if (data.length > 0) {
+          res.status(200).json({ status: "success", data: data[0] });
+        } else {
+          res
+            .status(404)
+            .json({ status: "fail", message: "Profile not found" });
+        }
+      }
+    }
+  );
 };

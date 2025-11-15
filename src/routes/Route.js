@@ -37,12 +37,8 @@ router.post(
   UsersController.profileUpdate
 );
 
-// // 4. Get User Details Route
-// router.get(
-//   "/ProfileDetails",
-//   AuthVerifyMiddleware,
-//   UsersController.ProfileDetails
-// );
+// 4. Get User Details Route
+router.get("/ProfileDetails", AuthVerifyMiddleware, UsersController.getProfile);
 // // 5. Password Recovery Routes
 // router.get("/RecoverVerifyEmail/:email", UsersController.RecoverVerifyEmail);
 // // 6. Verify OTP Route

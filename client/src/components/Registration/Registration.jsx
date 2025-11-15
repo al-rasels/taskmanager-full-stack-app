@@ -1,9 +1,10 @@
 import React, { Fragment, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormHelper from "../../helper/FormHelper";
 import { RegistrationRequest } from "../../APIRequest/APIRequest";
 
 const Registration = () => {
+  const navigate = useNavigate();
   const refs = {
     email: useRef(),
     firstName: useRef(),
@@ -32,13 +33,13 @@ const Registration = () => {
     } else {
       RegistrationRequest(userData).then((result) => {
         if (result !== false) {
+          navigate("/login");
+        } else {
           refs.email.current.value = "";
           refs.firstName.current.value = "";
           refs.lastName.current.value = "";
           refs.mobile.current.value = "";
           refs.password.current.value = "";
-        } else {
-          console.log("Registration failed");
         }
       });
     }

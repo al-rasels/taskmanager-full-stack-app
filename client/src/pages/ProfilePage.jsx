@@ -1,4 +1,4 @@
-import React, { Fragment, lazy } from "react";
+import React, { Fragment, lazy, Suspense } from "react";
 import MasterLayout from "../components/masterLayout/MasterLayout";
 import LazyLoader from "../components/masterLayout/LazyLoader";
 const Profile = lazy(() => import("../components/Profile/Profile"));
