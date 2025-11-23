@@ -39,12 +39,13 @@ router.post(
 
 // 4. Get User Details Route
 router.get("/ProfileDetails", AuthVerifyMiddleware, UsersController.getProfile);
-// // 5. Password Recovery Routes
-// router.get("/RecoverVerifyEmail/:email", UsersController.RecoverVerifyEmail);
-// // 6. Verify OTP Route
-// router.get("/RecoverVerifyOTP/:email/:otp", UsersController.RecoverVerifyOTP);
-// // 7. Reset Password Route
-// router.post("/RecoverResetPass", UsersController.RecoverResetPass);
+
+// 5. Password Recovery Routes
+router.get("/RecoverVerifyEmail/:email", UsersController.RecoverVerifyEmail);
+// 6. Verify OTP Route
+router.get("/RecoverVerifyOTP/:email/:otp", UsersController.RecoverVerifyOTP);
+// 7. Reset Password Route
+router.post("/RecoverResetPass", UsersController.RecoverResetPass);
 
 /* -------------------------------------------------------------------------- */
 /*                              Tasks Routes                                  */

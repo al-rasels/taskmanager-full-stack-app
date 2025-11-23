@@ -52,7 +52,8 @@ const MasterLayout = ({ children }) => {
               <span>Task Master</span>
             </a>
           </Navbar.Brand>
-          <div className="float-right h-auto d-flex">
+
+          <div className={userData ? "float-right h-auto d-flex" : "d-none"}>
             <div className="user-dropdown">
               <img
                 src={userData?.photo}

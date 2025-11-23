@@ -6,13 +6,16 @@ import NewPage from "./pages/NewPage";
 import CanceledPage from "./pages/CanceledPage";
 import ProgressPage from "./pages/ProgressPage";
 import CompletedPage from "./pages/CompletedPage";
-import ForgetPage from "./pages/ForgetPage";
+
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import ProfilePage from "./pages/ProfilePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import FullScreenLoader from "./components/masterLayout/FullScreenLoader";
 import { getToken } from "./helper/SessionHelper";
+import SendOTP from "./components/AccountRecover/SendOTP";
+import CreatePassword from "./components/AccountRecover/CreatePassword";
+import VerifyOTP from "./components/AccountRecover/VerifyOTP";
 
 const App = () => {
   if (getToken()) {
@@ -40,8 +43,11 @@ const App = () => {
           <Routes>
             <Route exact path="/" element={<Navigate to="/login" replace />} />
             <Route exact path="/login" element={<LoginPage />} />
-            <Route exact path="/forget" element={<ForgetPage />} />
+
             <Route exact path="/register" element={<RegistrationPage />} />
+            <Route exact path="/sendOTP" element={<SendOTP />} />
+            <Route exact path="/verifyOTP" element={<VerifyOTP />} />
+            <Route exact path="/createPassword" element={<CreatePassword />} />
             <Route exact path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>

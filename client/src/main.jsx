@@ -6,11 +6,14 @@ import "animate.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "react-redux";
 import store from "./redux/store/store.js";
-
+import { ToastContainer } from "react-toastify";
+// Redux Store Provider Setup
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+    {/* Redux */}
     <Provider store={store}>
       <App />
+      <ToastContainer />
     </Provider>
   </StrictMode>
 );

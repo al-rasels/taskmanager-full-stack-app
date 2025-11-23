@@ -2,7 +2,13 @@ import axios from "axios";
 import FormHelper from "../helper/FormHelper";
 import store from "../redux/store/store";
 import { HideLoader, ShowLoader } from "../redux/state-slice/settings-slice";
-import { getToken, setToken, setUserData } from "../helper/SessionHelper";
+import SessionHelper, {
+  getToken,
+  setEmail,
+  setOTP,
+  setToken,
+  setUserData,
+} from "../helper/SessionHelper";
 import {
   SetCanceledTasks,
   SetCompletedTasks,
@@ -221,6 +227,117 @@ export function GetProfileRequest() {
     .catch(() => {
       store.dispatch(HideLoader());
       FormHelper.errorToast("Failed to fetch profile!");
+      return false;
+    });
+}
+
+//--------- Update Profile Request-----------//
+export function UpdateProfileRequest(profileData) {
+  store.dispatch(ShowLoader());
+  const URl = BASE_URL + "/profileUpdate";
+  const PostBody = profileData;
+  const userData = profileData;
+  return axios
+    .post(URl, PostBody, AxiosHeader)
+    .then((res) => {
+      store.dispatch(HideLoader());
+      if (res["status"] === 200) {
+        setUserData(userData);
+        return true;
+      } else {
+        return false;
+      }
+    })
+    .catch(() => {
+      store.dispatch(HideLoader());
+      FormHelper.errorToast("Failed to update profile!");
+      return false;
+    });
+}
+
+//--------- Send OTP to Email Request step: 1 -----------//
+export function RecoverVerifyEmailRequest(email) {
+  store.dispatch(ShowLoader());
+  const URl = BASE_URL + "/RecoverVerifyEmail/" + email;
+
+  return axios
+    .get(URl)
+    .then((res) => {
+      store.dispatch(HideLoader());
+
+      if (res["status"] === 200) {
+        if (res.data["status"] == "success") {
+          setEmail(email);
+          FormHelper.successToast("A 6 Digit Code has been sent !");
+          return true;
+        }
+      } else {
+        FormHelper.errorToast("No user found!");
+        return false;
+      }
+    })
+    .catch(() => {
+      store.dispatch(HideLoader());
+      FormHelper.errorToast("Failed to change password!");
+      return false;
+    });
+}
+
+//--------- Verify OTP Request step:2 -----------//
+export function RecoverVerifyOTPRequest(email, OTP) {
+  store.dispatch(ShowLoader());
+  const URl = BASE_URL + `/RecoverVerifyOTP/${email}/${OTP}`;
+
+  return axios
+    .get(URl)
+    .then((res) => {
+      store.dispatch(HideLoader());
+      console.log(res);
+
+      if (res["status"] === 200) {
+        if (res.data.status === "success") {
+          setOTP(OTP);
+          FormHelper.successToast("Verification success!");
+          return true;
+        }
+      } else {
+        FormHelper.errorToast(res.data["data"]);
+        return false;
+      }
+    })
+    .catch(() => {
+      store.dispatch(HideLoader());
+      FormHelper.errorToast("Failed to change password!");
+      return false;
+    });
+}
+
+//--------- Change Password Request step: 3 -----------//
+export function ChangePasswordRequest(email, OTP, password) {
+  store.dispatch(ShowLoader());
+  const URl = BASE_URL + "/RecoverResetPass";
+  const PostBody = {
+    email: email,
+    code: OTP,
+    password: password,
+  };
+  return axios
+    .post(URl, PostBody, AxiosHeader)
+    .then((res) => {
+      store.dispatch(HideLoader());
+      if (res["status"] === 200) {
+        if (res.data["status"] === "success") {
+          FormHelper.successToast("Password has been changed!");
+          return true;
+        }
+      } else {
+        FormHelper.errorToast(res.data["data"]);
+        return false;
+      }
+    })
+    .catch(() => {
+      store.dispatch(HideLoader());
+      FormHelper.errorToast("Something wrong!");
       return false;
     });
 }

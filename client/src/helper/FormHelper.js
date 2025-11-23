@@ -1,6 +1,5 @@
 /*  eslint-disable */
-
-import cogoToast from "cogo-toast";
+import { toast } from "react-toastify";
 
 // Regular Expressions
 const EmailRegx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -42,13 +41,45 @@ class FormHelper {
   // Toast for error
   static errorToast(msg) {
     if (!msg) return;
-    cogoToast.error(msg, { position: "bottom-center" });
+
+    toast.error(msg, { position: "bottom-center" });
   }
 
   // Toast for success
   static successToast(msg) {
     if (!msg) return;
-    cogoToast.success(msg, { position: "bottom-center" });
+    toast.success(msg, { position: "bottom-center" });
+  }
+
+  // Convert file to base64
+  static toBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  }
+
+  // ********** NEW METHOD **********
+  // Validate real image file + extension + MIME
+  static isValidImageFile(file) {
+    if (!file) return false;
+
+    const fileName = file.name || "";
+    const extension = fileName.split(".").pop().toLowerCase();
+
+    // Check extension
+    if (!validFileExtensions.includes(extension)) {
+      return false;
+    }
+
+    // Check MIME type (real file type)
+    if (!file.type.startsWith("image/")) {
+      return false;
+    }
+
+    return true;
   }
 }
 

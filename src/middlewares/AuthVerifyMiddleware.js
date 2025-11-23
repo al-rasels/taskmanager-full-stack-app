@@ -21,7 +21,6 @@ module.exports = async (Request, Response, Next) => {
       const email = decoded["data"];
 
       // Attach email to request headers for further use
-      console.log(email);
 
       Request.headers["email"] = email;
       // Proceed to next middleware or route handler

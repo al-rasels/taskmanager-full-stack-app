@@ -17,7 +17,7 @@ const SendEmailUtility = async (EmailTo, EmailText, EmailSubject) => {
   // 2. Define the email options
   const mailOptions = {
     to: EmailTo, // list of receivers
-    from: "Inventory Management System <rm.shanto786@gmail.com>", // sender address
+    from: "TaskManager <dev.alrasels@gmail.com>", // sender address
     subject: EmailSubject, // Subject line
     text: EmailText, // plain text body
     // html: "<b>Hello world?</b>", // html body

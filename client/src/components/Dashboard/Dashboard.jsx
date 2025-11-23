@@ -1,13 +1,6 @@
 import { useEffect } from "react";
 import { SummaryRequest } from "../../APIRequest/APIRequest";
 import { useSelector } from "react-redux";
-import {
-  Radar,
-  RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-} from "recharts";
 
 const Dashboard = () => {
   useEffect(() => {

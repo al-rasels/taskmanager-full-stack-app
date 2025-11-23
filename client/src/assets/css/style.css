@@ -80,7 +80,12 @@ body a {
 }
 
 /* optional  */
-
+.img-thumbnail {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 300px !important;
+  width: 300px !important;
+}
 /* Smooth fade-in */
 @keyframes fadeIn {
   from {

@@ -12,17 +12,20 @@ const Registration = () => {
     mobile: useRef(),
     password: useRef(),
   };
+
   const handleRegistration = () => {
     const userData = {
       email: refs.email.current.value,
-      fistName: refs.firstName.current.value,
+      firstName: refs.firstName.current.value,
       lastName: refs.lastName.current.value,
       mobile: refs.mobile.current.value,
       password: refs.password.current.value,
     };
+
+    // form validation
     if (!FormHelper.isEmail(userData.email)) {
       FormHelper.errorToast("Valid Email Address Required!");
-    } else if (FormHelper.isEmpty(userData.fistName)) {
+    } else if (FormHelper.isEmpty(userData.firstName)) {
       FormHelper.errorToast("First Name Required!");
     } else if (FormHelper.isEmpty(userData.lastName)) {
       FormHelper.errorToast("Last Name Required!");
@@ -43,7 +46,6 @@ const Registration = () => {
         }
       });
     }
-    console.log("Registration Button Clicked");
   };
   return (
     <Fragment>
@@ -99,7 +101,7 @@ const Registration = () => {
                     Sign In
                   </Link>
                   <br />
-                  <Link className="text-center " to={"/"}>
+                  <Link className="text-center " to={"/sendOTP"}>
                     Forget Password
                   </Link>
                 </div>
