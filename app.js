@@ -19,7 +19,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const hpp = require("hpp");
 const cors = require("cors");
-
+const path = require("path");
 // Routes
 const router = require("./src/routes/Route");
 
@@ -88,6 +88,17 @@ app.use((req, res) => {
     status: "fail",
     message: "Not Found",
   });
+});
+
+/* -------------------------------------------------------------------------- */
+/*                                  Scaffolding Process                       */
+/* -------------------------------------------------------------------------- */
+// Scaffolding with client-side
+app.use(express.static(path.join(__dirname, "/client/dist")));
+
+// Add React Front End Routing
+app.get("*", function (req, res) {
+  res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
 });
 
 /* -------------------------------------------------------------------------- */
