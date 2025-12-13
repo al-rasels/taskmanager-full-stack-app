@@ -19,11 +19,11 @@ const Login = () => {
       FormHelper.errorToast("Password is required");
     } else {
       LoginRequest(loginData).then((result) => {
-        if (result !== false) {
-          window.location.href = "/";
-        } else {
-          loginRefs.email.current.value = "";
+        if (result === false) {
+          loginRefs.email.current.value = ""; // TODO: Test the login routing bugs
           loginRefs.password.current.value = "";
+        } else {
+          window.location.href = "/";
         }
       });
     }

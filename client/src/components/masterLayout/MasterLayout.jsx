@@ -1,8 +1,9 @@
-// lib Imports
-import React, { Fragment } from "react";
+// Imports
+import React, { Fragment, useRef } from "react";
 import { Container, Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-// icon Imports
+
+// Icons
 import {
   AiOutlineCheckCircle,
   AiOutlineEdit,
@@ -12,152 +13,112 @@ import {
 import { BsHourglass, BsListNested } from "react-icons/bs";
 import { RiDashboardLine } from "react-icons/ri";
 import { MdOutlineCancelPresentation } from "react-icons/md";
-// Component Imports
-import logo from "../../assets/images/tasklogo.webp";
 
+// Assets + Helpers
+import logo from "../../assets/images/tasklogo.webp";
 import FormHelper from "../../helper/FormHelper";
 import { getUserData, removeUserData } from "../../helper/SessionHelper";
 
 const MasterLayout = ({ children }) => {
-  const sideNavRef = React.useRef(null);
-  const contentRef = React.useRef(null);
+  const sideNavRef = useRef(null);
+  const contentRef = useRef(null);
+
+  const userData = getUserData();
+
+  const toggleSidebar = () => {
+    const sideNav = sideNavRef.current;
+    const content = contentRef.current;
+
+    sideNav.classList.toggle("collapsed");
+    content.classList.toggle("expanded");
+  };
+
   const onLogout = () => {
     removeUserData();
     FormHelper.successToast("Logout successful!");
   };
-  const userData = getUserData();
-  const MenuBarClickedHandler = () => {
-    let sideNav = sideNavRef.current;
-    let content = contentRef.current;
-    if (sideNav.classList.contains("side-nav-open")) {
-      sideNav.classList.add("side-nav-close");
-      sideNav.classList.remove("side-nav-open");
-      content.classList.add("content-expanded");
-      content.classList.add("content");
-    } else {
-      sideNav.classList.remove("side-nav-close");
-      sideNav.classList.add("side-nav-open");
-      content.classList.remove("content-expanded");
-      content.classList.add("content");
-    }
-  };
 
   return (
     <Fragment>
-      <Navbar className="fixed-top px-0 shadow-sm ">
-        <Container fluid={true} style={{ maxWidth: "100%" }}>
-          <Navbar.Brand>
-            <a className="icon-nav m-0 h5" onClick={MenuBarClickedHandler}>
-              <img src={logo} alt="logo" className="nav-logo mx-2" />{" "}
-              <span>Task Master</span>
-            </a>
+      {/* NAVBAR */}
+      <Navbar className="fixed-top px-0 shadow-sm master-navbar">
+        <Container fluid>
+          <Navbar.Brand className="d-flex align-items-center">
+            <button className="menu-btn" onClick={toggleSidebar}>
+              <AiOutlineMenuUnfold size={24} />
+            </button>
+
+            <img src={logo} alt="logo" className="nav-logo mx-2" />
+            <span className="brand-text">Task Master</span>
           </Navbar.Brand>
 
-          <div className={userData ? "float-right h-auto d-flex" : "d-none"}>
+          {/* USER DROPDOWN */}
+          {userData && (
             <div className="user-dropdown">
-              <img
-                src={userData?.photo}
-                alt={"user"}
-                className="icon-nav-img icon-nav"
-              />
+              <img src={userData?.photo} alt="user" className="icon-nav-img" />
               <div className="user-dropdown-content">
                 <div className="mt-4 text-center">
                   <img
                     src={userData?.photo}
                     alt={userData?.firstName}
-                    className="icon-nav-img icon-nav"
+                    className="icon-nav-img"
                   />
                   <h6 className="mb-0">
                     Hi {userData?.firstName} {userData?.lastName}
                   </h6>
-                  <hr className="user-dropdown-divider p-0" />
+                  <hr className="user-dropdown-divider" />
                 </div>
+
                 <NavLink to="/profile" className="side-bar-item">
                   <AiOutlineUser className="side-bar-item-icon" />
-                  <span className="side-bar-item-caption">Profile</span>
+                  <span>Profile</span>
                 </NavLink>
+
                 <a onClick={onLogout} className="side-bar-item">
                   <AiOutlineUser className="side-bar-item-icon" />
-                  <span className="side-bar-item-caption">Logout</span>
+                  <span>Logout</span>
                 </a>
               </div>
             </div>
-          </div>
+          )}
         </Container>
       </Navbar>
-      <div
-        ref={(div) => {
-          sideNavRef.current = div;
-        }}
-        className="side-nav-open ">
-        {/* Side Navigation content goes here */}
-        <NavLink
-          to="/"
-          className={(navData) =>
-            navData.isActive
-              ? "side-bar-item-active side-bar-item mt-2"
-              : "side-bar-item mt-2"
-          }>
+
+      {/* SIDEBAR */}
+      <div className="side-nav" ref={sideNavRef}>
+        <NavLink to="/" className="side-bar-item mt-3">
           <RiDashboardLine className="side-bar-item-icon" />
-          <span className="side-bar-item-caption">Dashboard</span>
+          <span>Dashboard</span>
         </NavLink>
 
-        <NavLink
-          to="/create"
-          className={(navData) =>
-            navData.isActive
-              ? "side-bar-item-active side-bar-item mt-2"
-              : "side-bar-item mt-2"
-          }>
+        <NavLink to="/create" className="side-bar-item mt-2">
           <AiOutlineEdit className="side-bar-item-icon" />
-          <span className="side-bar-item-caption">Create New</span>
+          <span>Create New</span>
         </NavLink>
-        <NavLink
-          to="/all"
-          className={(navData) =>
-            navData.isActive
-              ? "side-bar-item-active side-bar-item mt-2"
-              : "side-bar-item mt-2"
-          }>
+
+        <NavLink to="/all" className="side-bar-item mt-2">
           <BsListNested className="side-bar-item-icon" />
-          <span className="side-bar-item-caption">New Tasks</span>
+          <span>New Tasks</span>
         </NavLink>
-        <NavLink
-          to="/progress"
-          className={(navData) =>
-            navData.isActive
-              ? "side-bar-item-active side-bar-item mt-2"
-              : "side-bar-item mt-2"
-          }>
+
+        <NavLink to="/progress" className="side-bar-item mt-2">
           <BsHourglass className="side-bar-item-icon" />
-          <span className="side-bar-item-caption">In Progress</span>
+          <span>In Progress</span>
         </NavLink>
-        <NavLink
-          to="/completed"
-          className={(navData) =>
-            navData.isActive
-              ? "side-bar-item-active side-bar-item mt-2"
-              : "side-bar-item mt-2"
-          }>
+
+        <NavLink to="/completed" className="side-bar-item mt-2">
           <AiOutlineCheckCircle className="side-bar-item-icon" />
-          <span className="side-bar-item-caption">Completed</span>
+          <span>Completed</span>
         </NavLink>
-        <NavLink
-          to="/canceled"
-          className={(navData) =>
-            navData.isActive
-              ? "side-bar-item-active side-bar-item mt-2"
-              : "side-bar-item mt-2"
-          }>
+
+        <NavLink to="/canceled" className="side-bar-item mt-2">
           <MdOutlineCancelPresentation className="side-bar-item-icon" />
-          <span className="side-bar-item-caption">Canceled</span>
+          <span>Canceled</span>
         </NavLink>
       </div>
-      <div
-        className="content"
-        ref={(div) => {
-          contentRef.current = div;
-        }}>
+
+      {/* MAIN CONTENT */}
+      <div className="content-area" ref={contentRef}>
         {children}
       </div>
     </Fragment>

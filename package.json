@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm install --prefix ./client && npm run build --prefix ./client && npm install",
+    "build": "npm install --save-dev @rollup/rollup-linux-x64-gnu && npm install && cd client/ && npm i && npm run build && cd .. node index.js",
     "dev": "npm run dev --prefix ./client",
     "start": "nodemon index.js"
   },

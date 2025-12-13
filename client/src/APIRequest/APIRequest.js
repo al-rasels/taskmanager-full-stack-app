@@ -164,16 +164,15 @@ export function LoginRequest(loginData) {
         setToken(res.data["token"]);
         setUserData(res.data["data"]);
         FormHelper.successToast("Login Success!");
+        return true;
       } else {
         FormHelper.errorToast("Invalid credentials!");
-
         return false;
       }
     })
     .catch(() => {
       store.dispatch(HideLoader());
       FormHelper.errorToast("Something went wrong!");
-
       return false;
     });
 }
